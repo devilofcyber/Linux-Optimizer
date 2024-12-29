@@ -33,9 +33,9 @@ DNS_PATH="/etc/resolv.conf"
 echo 
 green_msg '================================================================='
 green_msg 'This script will automatically Optimize your Linux Server.'
-green_msg 'Tested on: Ubuntu 20+, Debian 11+, CentOS stream 8+, AlmaLinux 8+, Fedora 37+'
+green_msg 'Tested on: Ubuntu 20+, Debian 11+'
 green_msg 'Root access is required.' 
-green_msg 'Source is @ https://github.com/hawshemi/linux-optimizer' 
+green_msg 'Source is @ https://github.com/devilofcyber/linux-optimizer' 
 green_msg '================================================================='
 echo 
 
@@ -68,23 +68,6 @@ install_dependencies_debian_based() {
   apt update -q
   apt install -yq wget curl sudo jq
 
-  echo
-  green_msg 'Dependencies Installed.'
-  echo 
-  sleep 0.5
-}
-
-
-# Install dependencies
-install_dependencies_rhel_based() {
-  echo 
-  yellow_msg 'Installing Dependencies...'
-  echo 
-  sleep 0.5
-
-  # dnf up -y
-  dnf install -y wget curl sudo jq
-  
   echo
   green_msg 'Dependencies Installed.'
   echo 
@@ -127,10 +110,10 @@ fix_dns(){
 
     sed -i '/nameserver/d' $DNS_PATH
 
-    echo "nameserver 1.1.1.2" >> $DNS_PATH
-    echo "nameserver 1.0.0.2" >> $DNS_PATH
     echo "nameserver 127.0.0.53" >> $DNS_PATH
-
+    echo "nameserver 1.1.1.1" >> $DNS_PATH
+    echo "nameserver 1.0.0.1" >> $DNS_PATH
+    
     green_msg "DNS Fixed Temporarily."
     echo 
     sleep 0.5
@@ -202,31 +185,10 @@ elif [[ $(grep -oP '(?<=^NAME=").*(?=")' /etc/os-release) == "Debian GNU/Linux" 
     yellow_msg "OS: Debian"
     echo 
     sleep 0.5
-elif [[ $(grep -oP '(?<=^NAME=").*(?=")' /etc/os-release) == "CentOS Stream" ]]; then
-    OS="centos"
-    echo 
-    sleep 0.5
-    yellow_msg "OS: Centos Stream"
-    echo 
-    sleep 0.5
-elif [[ $(grep -oP '(?<=^NAME=").*(?=")' /etc/os-release) == "AlmaLinux" ]]; then
-    OS="almalinux"
-    echo 
-    sleep 0.5
-    yellow_msg "OS: AlmaLinux"
-    echo 
-    sleep 0.5
-elif [[ $(grep -oP '(?<=^NAME=").*(?=")' /etc/os-release) == "Fedora Linux" ]]; then
-    OS="fedora"
-    echo 
-    sleep 0.5
-    yellow_msg "OS: Fedora"
-    echo 
-    sleep 0.5
 else
     echo 
     sleep 0.5
-    red_msg "Unknown OS, Create an issue here: https://github.com/hawshemi/Linux-Optimizer"
+    red_msg "Unknown OS"
     OS="unknown"
     echo 
     sleep 2
@@ -238,8 +200,6 @@ fi
 # Install dependencies
 if [[ "$OS" == "ubuntu" || "$OS" == "debian" ]]; then
     install_dependencies_debian_based
-elif [[ "$OS" == "centos" || "$OS" == "fedora" || "$OS" == "almalinux" ]]; then
-    install_dependencies_rhel_based
 fi
 
 
@@ -266,21 +226,8 @@ debian)
     # Debian
     wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/scripts/debian-optimizer.sh" -q -O debian-optimizer.sh && chmod +x debian-optimizer.sh && bash debian-optimizer.sh 
     ;;
-centos)
-    # CentOS
-    wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/scripts/centos-optimizer.sh" -q -O centos-optimizer.sh && chmod +x centos-optimizer.sh && bash centos-optimizer.sh 
-    ;;
-almalinux)
-    # AlmaLinux
-    wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/scripts/centos-optimizer.sh" -q -O almalinux-optimizer.sh && chmod +x almalinux-optimizer.sh && bash almalinux-optimizer.sh 
-    ;;
-fedora)
-    # Fedora
-    wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/scripts/fedora-optimizer.sh" -q -O fedora-optimizer.sh && chmod +x fedora-optimizer.sh && bash fedora-optimizer.sh 
-    ;;
 unknown)
     # Unknown
     exit 
     ;;
 esac
-
