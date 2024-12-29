@@ -8,11 +8,11 @@
 
 ### It performs the following tasks:
        
-0. Fix `hosts` file and DNS _(temporarily)_:
+0. Fix `hosts` file and DNS:
     - Check and add 127.0.1.1 and server hostname to `/etc/hosts`.
     
     *Original `hosts` file is backed up at `/etc/hosts.bak`.*
-    - Add `1.1.1.2`, `1.0.0.2` nameservers to `/etc/resolv.conf`.
+    - Add `1.1.1.1`, `1.0.0.1` nameservers to `/etc/resolv.conf`.
     
     *Original `dns` file is backed up at `/etc/resolv.conf.bak`.*
 
@@ -26,10 +26,10 @@
     - _Clean_
 
 
-2. Disable Terminal Ads _(Only on Ubuntu)_.
+2. Disable Terminal Ads.
 
 
-3. Install XanMod Kernel _(Only on Ubuntu & Debian)_:
+3. Install XanMod Kernel:
     - Enable BBRv3.
     - CloudFlare TCP Optimizations.
     - More Details: https://xanmod.org
@@ -53,7 +53,7 @@
 8. Enable `IPv6` Support.
 
 
-9. Optimize the [SYSCTL](https://github.com/hawshemi/Linux-Optimizer/blob/main/files/sysctl.conf) Configs:
+9. Optimize the [SYSCTL](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf) Configs:
     - Optimize File System Settings.
     - Optimize Network Core Settings.
     - Optimize `SWAP`.
@@ -67,7 +67,7 @@
     *Original file is backed up at `/etc/sysctl.conf.bak`.*
 
     
-10. Optimize [SSH](https://github.com/hawshemi/Linux-Optimizer/blob/main/files/sshd_config):
+10. Optimize [SSH](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sshd_config):
     - Disable DNS lookups for connecting clients.
     - Remove less efficient encryption ciphers.
     - Enable and Configure TCP keep-alive messages.
@@ -78,13 +78,13 @@
     *Original file is backed up at `/etc/ssh/sshd_config.bak`.*
    
 
-11. Optimize the [System Limits](https://github.com/hawshemi/Linux-Optimizer/blob/main/files/profile):
+11. Optimize the [System Limits](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/profile):
     - Soft and Hard *ulimit* `-c -d -f -i -l -n -q -s -u -v -x` optimizations.
     
     
-12. Optimize `UFW` and open Common Ports:
-    - Open Ports `SSH`, `80`, `443`.
-    - With `IPv6`, `TCP` & `UDP`.
+12. Optimize `UFW` and open SSH Ports:
+    - Open Ports `SSH`.
+    - With `IPv6`.
 
     
 Reboot at the end is Recommended.
@@ -98,14 +98,9 @@ Reboot at the end is Recommended.
 ```
 sudo apt update -q && sudo apt install -y sudo wget
 ```
-- CentOS & Fedora:
-```
-sudo dnf up -y && sudo dnf install -y sudo wget
-```
-
 
 ## Run
-#### **Tested on:** Ubuntu 20+, Debian 11+, CentOS Stream 8+, AlmaLinux 8+, Fedora 37+
+#### **Tested on:** Ubuntu 20+, Debian 11+.
 
 #### Root Access is Required. If the user is not root, first run:
 ```
@@ -113,17 +108,13 @@ sudo -i
 ```
 #### Then:
 ```
-wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/linux-optimizer.sh" -O linux-optimizer.sh && chmod +x linux-optimizer.sh && bash linux-optimizer.sh 
+wget "https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/main/linux-optimizer.sh" -O linux-optimizer.sh && chmod +x linux-optimizer.sh && bash linux-optimizer.sh 
 ```
 
 
 ## Menu Image
 ### Debian & Ubuntu:
-![debian-based-menu](https://github.com/hawshemi/Linux-Optimizer/assets/16742123/3604470e-48ed-403d-a753-143dc934f6fd)
-
-### CentOS, AlmaLinux & Fedora:
-![rhel-based-menu](https://github.com/hawshemi/Linux-Optimizer/assets/16742123/07099e64-3864-425f-83e2-cda1e57d5b62)
-
+![debian-based-menu](https://github.com/devilofcyber/Linux-Optimizer/assets/16742123/3604470e-48ed-403d-a753-143dc934f6fd)
 
 
 ## Disclaimer
