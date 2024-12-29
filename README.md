@@ -121,6 +121,10 @@ wget "https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/main/linux-
 This script is provided as-is, without any warranty or guarantee. Use it at your own risk.
 
 
+## A Special Thanks to
+- [hawshemi](https://github.com/hawshemi/)
+
+
 ## License
 This script is licensed under the MIT License.
 
