@@ -608,6 +608,7 @@ update_sshd_conf() {
     echo "X11Forwarding yes" | tee -a "$SSH_PATH"
 
     ## Restart the SSH service to apply the changes
+    sudo systemctl restart sshd
     sudo systemctl restart ssh
 
     echo 
