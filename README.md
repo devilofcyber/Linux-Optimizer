@@ -114,7 +114,7 @@ wget "https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/main/linux-
 
 ## Menu Image
 ### Debian & Ubuntu:
-![debian-based-menu](https://github.com/devilofcyber/Linux-Optimizer/assets/16742123/3604470e-48ed-403d-a753-143dc934f6fd)
+![debian-based-menu](https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/refs/heads/main/assets/1.png)
 
 
 ## Disclaimer
