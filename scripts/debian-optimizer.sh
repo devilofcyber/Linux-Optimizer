@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://github.com/hawshemi/Linux-Optimizer
+# https://github.com/devilofcyber/Linux-Optimizer
 
 
 # Green, Yellow & Red Messages.
@@ -190,10 +190,10 @@ installations() {
     sleep 0.5
 
     ## Networking packages
-    sudo apt -q -y install apt-transport-https
+    sudo apt -q -y install apt-transport-https openvswitch-switch-dpdk
 
     ## System utilities
-    sudo apt -q -y install apt-utils bash-completion busybox ca-certificates cron curl gnupg2 locales lsb-release nano preload screen software-properties-common ufw unzip vim wget xxd zip
+    sudo apt -q -y install apt-utils bash-completion busybox ca-certificates cron curl gnupg2 locales lsb-release nano preload screen software-properties-common ufw unzip vim wget xxd zip ncdu
 
     ## Programming and development tools
     sudo apt -q -y install autoconf automake bash-completion build-essential git libtool make pkg-config python3 python3-pip
@@ -314,7 +314,7 @@ sysctl_optimizations() {
         "$SYS_PATH"
 
 
-    ## Add new parameteres. Read More: https://github.com/hawshemi/Linux-Optimizer/blob/main/files/sysctl.conf
+    ## Add new parameteres. Read More: https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf
 
 cat <<EOF >> "$SYS_PATH"
 
@@ -325,7 +325,7 @@ cat <<EOF >> "$SYS_PATH"
 
 # /etc/sysctl.conf
 # These parameters in this file will be added/updated to the sysctl.conf file.
-# Read More: https://github.com/hawshemi/Linux-Optimizer/blob/main/files/sysctl.conf
+# Read More: https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf
 
 
 ## File system settings
@@ -436,13 +436,13 @@ net.ipv4.udp_mem = 65536 1048576 33554432
 ## ----------------------------------------------------------------
 
 # Enable IPv6
-#net.ipv6.conf.all.disable_ipv6 = 0
+net.ipv6.conf.all.disable_ipv6 = 0
 
 # Enable IPv6 by default
-#net.ipv6.conf.default.disable_ipv6 = 0
+net.ipv6.conf.default.disable_ipv6 = 0
 
 # Enable IPv6 on the loopback interface (lo)
-#net.ipv6.conf.lo.disable_ipv6 = 0
+net.ipv6.conf.lo.disable_ipv6 = 0
 
 
 ## UNIX domain sockets
@@ -593,6 +593,7 @@ update_sshd_conf() {
     echo "X11Forwarding yes" | tee -a "$SSH_PATH"
 
     ## Restart the SSH service to apply the changes
+    sudo systemctl restart sshd
     sudo systemctl restart ssh
 
     echo 
@@ -694,10 +695,6 @@ ufw_optimizations() {
 
     ## Open default ports.
     sudo ufw allow $SSH_PORT
-    sudo ufw allow 80/tcp
-    sudo ufw allow 80/udp
-    sudo ufw allow 443/tcp
-    sudo ufw allow 443/udp
     sleep 0.5
 
     ## Change the UFW config to use System config.
