@@ -100,7 +100,7 @@ sudo apt update -q && sudo apt install -y sudo wget
 ```
 
 ## Run
-#### **Tested on:** Ubuntu 20+, Debian 11+.
+#### **Tested on:** Ubuntu 20+, Debian 11+
 
 #### Root Access is Required. If the user is not root, first run:
 ```
