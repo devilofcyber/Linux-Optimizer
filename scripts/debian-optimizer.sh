@@ -317,8 +317,6 @@ sysctl_optimizations() {
     ## Add new parameteres. Read More: https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf
 
 cat <<EOF >> "$SYS_PATH"
-
-
 ################################################################
 ################################################################
 
@@ -496,8 +494,6 @@ vm.dirty_ratio = 20
 
 ################################################################
 ################################################################
-
-
 EOF
 
     sudo sysctl -p
@@ -695,6 +691,8 @@ ufw_optimizations() {
 
     ## Open default ports.
     sudo ufw allow $SSH_PORT
+    sudo ufw allow http
+    sudo ufw allow https
     sleep 0.5
 
     ## Change the UFW config to use System config.
