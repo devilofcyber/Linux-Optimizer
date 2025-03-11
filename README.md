@@ -87,7 +87,7 @@
     - With `IPv6`.
 
     
-++Reboot at the end is recommended.++
+**Reboot at the end is recommended.**
 
 
 ## Prerequisites
