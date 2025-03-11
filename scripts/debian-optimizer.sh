@@ -309,6 +309,8 @@ sysctl_optimizations() {
         -e '/net.ipv4.conf.all.arp_announce/d' \
         -e '/kernel.panic/d' \
         -e '/vm.dirty_ratio/d' \
+        -e '/vm.overcommit_memory/d' \
+        -e '/vm.overcommit_ratio/d' \
         -e '/^#/d' \
         -e '/^$/d' \
         "$SYS_PATH"
@@ -491,7 +493,12 @@ kernel.panic = 1
 # Set dirty page ratio for virtual memory
 vm.dirty_ratio = 20
 
-
+# Strictly limits memory allocation to physical RAM + swap, preventing overcommit and reducing OOM risks.
+vm.overcommit_memory = 2
+ 
+# Sets overcommit to 100% of RAM when enabled, but ignored here since overcommit_memory = 2 disables it.
+vm.overcommit_ratio = 100
+ 
 ################################################################
 ################################################################
 EOF
