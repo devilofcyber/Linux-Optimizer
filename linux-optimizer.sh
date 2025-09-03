@@ -110,7 +110,6 @@ fix_dns(){
 
     sed -i '/nameserver/d' $DNS_PATH
 
-    echo "nameserver 127.0.0.53" >> $DNS_PATH
     echo "nameserver 1.1.1.1" >> $DNS_PATH
     echo "nameserver 1.0.0.1" >> $DNS_PATH
     
@@ -120,54 +119,14 @@ fix_dns(){
 }
 
 
-# Set the server TimeZone to the VPS IP address location.
+# Set the server TimeZone to UTC.
 set_timezone() {
     echo
-    yellow_msg 'Setting TimeZone based on VPS IP address...'
+    yellow_msg 'Setting TimeZone ...'
     sleep 0.5
-
-    get_location_info() {
-        local ip_sources=("https://ipv4.icanhazip.com" "https://api.ipify.org" "https://ipv4.ident.me/")
-        local location_info
-
-        for source in "${ip_sources[@]}"; do
-            local ip=$(curl -s "$source")
-            if [ -n "$ip" ]; then
-                location_info=$(curl -s "http://ip-api.com/json/$ip")
-                if [ -n "$location_info" ]; then
-                    echo "$location_info"
-                    return 0
-                fi
-            fi
-        done
-
-        red_msg "Error: Failed to fetch location information from known sources. Setting timezone to UTC."
         sudo timedatectl set-timezone "UTC"
         return 1
     }
-
-    # Fetch location information from three sources
-    location_info_1=$(get_location_info)
-    location_info_2=$(get_location_info)
-    location_info_3=$(get_location_info)
-
-    # Extract timezones from the location information
-    timezones=($(echo "$location_info_1 $location_info_2 $location_info_3" | jq -r '.timezone'))
-
-    # Check if at least two timezones are equal
-    if [[ "${timezones[0]}" == "${timezones[1]}" || "${timezones[0]}" == "${timezones[2]}" || "${timezones[1]}" == "${timezones[2]}" ]]; then
-        # Set the timezone based on the first matching pair
-        timezone="${timezones[0]}"
-        sudo timedatectl set-timezone "$timezone"
-        green_msg "Timezone set to $timezone"
-    else
-        red_msg "Error: Failed to fetch consistent location information from known sources. Setting timezone to UTC."
-        sudo timedatectl set-timezone "UTC"
-    fi
-
-    echo
-    sleep 0.5
-}
 
 
 # OS Detection
