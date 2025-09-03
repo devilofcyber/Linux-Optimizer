@@ -42,8 +42,7 @@
 5. Enable Packages at Server Boot.
 
     
-6. Set the server TimeZone to the VPS IP address location.
-
+6. Set the server TimeZone to UTC.
 
 7. Enable `IPv6` Support.
 
@@ -104,11 +103,6 @@ sudo -i
 ```
 wget "https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/main/linux-optimizer.sh" -O linux-optimizer.sh && chmod +x linux-optimizer.sh && bash linux-optimizer.sh 
 ```
-
-
-## Menu Image
-### Debian & Ubuntu:
-![debian-based-menu](https://raw.githubusercontent.com/devilofcyber/Linux-Optimizer/refs/heads/main/assets/1.png)
 
 
 ## Disclaimer
