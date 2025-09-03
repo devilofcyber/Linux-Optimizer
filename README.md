@@ -12,7 +12,7 @@
     - Check and add 127.0.1.1 and server hostname to `/etc/hosts`.
     
     *Original `hosts` file is backed up at `/etc/hosts.bak`.*
-    - Add `127.0.0.53`, `1.1.1.1`, `1.0.0.1` nameservers to `/etc/resolv.conf`.
+    - Add `1.1.1.1`, `1.0.0.1` nameservers to `/etc/resolv.conf`.
     
     *Original `dns` file is backed up at `/etc/resolv.conf.bak`.*
 
@@ -44,19 +44,13 @@
     
 6. Set the server TimeZone to the VPS IP address location.
 
- 
-7. Create & Enable `SWAP` File:
-    - Swap Path: `"/swapfile"`
-    - Swap Size: `2Gb`
+
+7. Enable `IPv6` Support.
 
 
-8. Enable `IPv6` Support.
-
-
-9. Optimize the [SYSCTL](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf) Configs:
+8. Optimize the [SYSCTL](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sysctl.conf) Configs:
     - Optimize File System Settings.
     - Optimize Network Core Settings.
-    - Optimize `SWAP`.
     - Optimize `TCP` and `UDP` Settings.
     - Optimize `UNIX` Domain Sockets Settings.
     - Optimize `Virtual memory (VM)` Settings.
@@ -67,7 +61,7 @@
     *Original file is backed up at `/etc/sysctl.conf.bak`.*
 
     
-10. Optimize [SSH](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sshd_config):
+9. Optimize [SSH](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/sshd_config):
     - Disable DNS lookups for connecting clients.
     - Remove less efficient encryption ciphers.
     - Enable and Configure TCP keep-alive messages.
@@ -78,11 +72,11 @@
     *Original file is backed up at `/etc/ssh/sshd_config.bak`.*
    
 
-11. Optimize the [System Limits](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/profile):
+10. Optimize the [System Limits](https://github.com/devilofcyber/Linux-Optimizer/blob/main/files/profile):
     - Soft and Hard *ulimit* `-c -d -f -i -l -n -q -s -u -v -x` optimizations.
     
     
-12. Optimize `UFW` and open SSH Ports:
+11. Optimize `UFW` and open SSH Ports:
     - Open Ports `SSH`, `HTTP`, `HTTPS`.
     - With `IPv6`.
 
