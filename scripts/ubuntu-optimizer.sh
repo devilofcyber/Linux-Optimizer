@@ -768,6 +768,7 @@ main() {
 
             ask_reboot
             ;;
+            
         3)
             complete_update
             sleep 0.5
@@ -799,6 +800,7 @@ main() {
 
             ask_reboot
             ;;
+            
         4)
             complete_update
             sleep 0.5
@@ -826,6 +828,7 @@ main() {
 
             ask_reboot
             ;;
+            
         5)
             complete_update
             sleep 0.5
@@ -849,6 +852,7 @@ main() {
 
             ask_reboot
             ;;
+            
         6)
             complete_update
             sleep 0.5
@@ -897,6 +901,7 @@ main() {
 
             ask_reboot
             ;;
+            
         9)
             sysctl_optimizations
             sleep 0.5
@@ -907,6 +912,7 @@ main() {
             green_msg '========================='
 
             ;;
+            
         10)
             remove_old_ssh_conf
             sleep 0.5
@@ -920,6 +926,7 @@ main() {
             green_msg '========================='
 
             ;;
+            
         11)
             limits_optimizations
             sleep 0.5
@@ -931,6 +938,7 @@ main() {
 
             ask_reboot
             ;;
+            
         12)
             find_ssh_port
             ufw_optimizations
@@ -942,6 +950,7 @@ main() {
             green_msg '========================='
 
             ;;
+            
         q)
             exit 0
             ;;
@@ -949,6 +958,7 @@ main() {
         *)
             red_msg 'Wrong input!'
             ;;
+            
         esac
     done
 }
