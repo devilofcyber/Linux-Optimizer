@@ -27,8 +27,6 @@ SYS_PATH="/etc/sysctl.conf"
 PROF_PATH="/etc/profile"
 SSH_PORT=""
 SSH_PATH="/etc/ssh/sshd_config"
-SWAP_PATH="/swapfile"
-SWAP_SIZE=2G
 
 
 # Root
@@ -233,26 +231,6 @@ enable_packages() {
     sudo systemctl enable cron haveged preload
     echo 
     green_msg 'Packages Enabled Successfully.'
-    echo
-    sleep 0.5
-}
-
-
-## Swap Maker
-swap_maker() {
-    echo 
-    yellow_msg 'Making SWAP Space...'
-    echo 
-    sleep 0.5
-
-    ## Make Swap
-    sudo fallocate -l $SWAP_SIZE $SWAP_PATH  ## Allocate size
-    sudo chmod 600 $SWAP_PATH                ## Set proper permission
-    sudo mkswap $SWAP_PATH                   ## Setup swap         
-    sudo swapon $SWAP_PATH                   ## Enable swap
-    echo "$SWAP_PATH   none    swap    sw    0   0" >> /etc/fstab ## Add to fstab
-    echo 
-    green_msg 'SWAP Created Successfully.'
     echo
     sleep 0.5
 }
@@ -740,20 +718,19 @@ show_menu() {
     echo
     green_msg '2  - Install XanMod Kernel.'
     echo 
-    green_msg '3  - Complete Update + Useful Packages + Make SWAP + Optimize Network, SSH & System Limits + UFW'
-    green_msg '4  - Complete Update + Make SWAP + Optimize Network, SSH & System Limits + UFW'
-    green_msg '5  - Complete Update + Make SWAP + Optimize Network, SSH & System Limits'
+    green_msg '3  - Complete Update + Useful Packages + Optimize Network, SSH & System Limits + UFW'
+    green_msg '4  - Complete Update + Optimize Network, SSH & System Limits + UFW'
+    green_msg '5  - Complete Update + Optimize Network, SSH & System Limits'
     echo 
     green_msg '6  - Complete Update & Clean the OS.'
     green_msg '7  - Install Useful Packages.'
-    green_msg '8  - Make SWAP (2Gb).'
-    green_msg '9  - Optimize the Network, SSH & System Limits.'
+    green_msg '8  - Optimize the Network, SSH & System Limits.'
     echo 
-    green_msg '10 - Optimize the Network settings.'
-    green_msg '11 - Optimize the SSH settings.'
-    green_msg '12 - Optimize the System Limits.'
+    green_msg '9 - Optimize the Network settings.'
+    green_msg '10 - Optimize the SSH settings.'
+    green_msg '11 - Optimize the System Limits.'
     echo 
-    green_msg '13 - Install & Optimize UFW.'
+    green_msg '12 - Install & Optimize UFW.'
     echo 
     red_msg 'q - Exit.'
     echo 
@@ -799,9 +776,6 @@ main() {
             enable_packages
             sleep 0.5
 
-            swap_maker
-            sleep 0.5
-
             sysctl_optimizations
             sleep 0.5
 
@@ -829,9 +803,6 @@ main() {
             complete_update
             sleep 0.5
 
-            swap_maker
-            sleep 0.5
-
             sysctl_optimizations
             sleep 0.5
 
@@ -857,9 +828,6 @@ main() {
             ;;
         5)
             complete_update
-            sleep 0.5
-
-            swap_maker
             sleep 0.5
 
             sysctl_optimizations
@@ -908,8 +876,18 @@ main() {
 
             ask_reboot
             ;;
+
         8)
-            swap_maker
+            sysctl_optimizations
+            sleep 0.5
+
+            remove_old_ssh_conf
+            sleep 0.5
+
+            update_sshd_conf
+            sleep 0.5
+
+            limits_optimizations
             sleep 0.5
 
             echo 
@@ -923,24 +901,17 @@ main() {
             sysctl_optimizations
             sleep 0.5
 
-            remove_old_ssh_conf
-            sleep 0.5
-
-            update_sshd_conf
-            sleep 0.5
-
-            limits_optimizations
-            sleep 0.5
-
             echo 
             green_msg '========================='
             green_msg  'Done.'
             green_msg '========================='
 
-            ask_reboot
             ;;
         10)
-            sysctl_optimizations
+            remove_old_ssh_conf
+            sleep 0.5
+
+            update_sshd_conf
             sleep 0.5
 
             echo 
@@ -950,19 +921,6 @@ main() {
 
             ;;
         11)
-            remove_old_ssh_conf
-            sleep 0.5
-
-            update_sshd_conf
-            sleep 0.5
-
-            echo 
-            green_msg '========================='
-            green_msg  'Done.'
-            green_msg '========================='
-
-            ;;
-        12)
             limits_optimizations
             sleep 0.5
 
@@ -973,7 +931,7 @@ main() {
 
             ask_reboot
             ;;
-        13)
+        12)
             find_ssh_port
             ufw_optimizations
             sleep 0.5
@@ -1010,9 +968,6 @@ apply_everything() {
 
     installations
     enable_packages
-    sleep 0.5
-
-    swap_maker
     sleep 0.5
 
     sysctl_optimizations
