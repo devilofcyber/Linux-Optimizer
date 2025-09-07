@@ -125,6 +125,7 @@ set_timezone() {
     yellow_msg 'Setting TimeZone ...'
     sleep 0.5
         sudo timedatectl set-timezone "UTC"
+        green_msg "Timezone set to UTC."
         return 1
     }
 
